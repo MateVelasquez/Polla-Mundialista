@@ -1,0 +1,644 @@
+@import url('https://unpkg.com/country-flag-emoji-polyfill@0.1.8/dist/FontPack.css');
+
+/* Estilos Generales del Contenedor */
+.app-container {
+  min-height: 100vh;
+  background-color: black;
+  padding: 2.5rem 0.5rem;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+/* Encabezado */
+.app-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  max-width: 45rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+}
+
+.app-subtitle {
+  font-size: 1.20rem;
+  color: white;
+  margin: 0;
+}
+
+/* Tarjeta de Entrada de Nombre */
+.name-card {
+  width: 60%;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  box-sizing: border-box;
+  margin: 1.5rem auto;
+}
+
+.name-label {
+  display: block;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.name-input {
+  width: 100%;
+  height: 200%;
+  padding: 1rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 600;
+  box-sizing: border-box;
+  transition: all 0.2s;
+  margin-top: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+}
+
+/* Botón Guardar */
+.btn-save {
+  width: 100%;
+  padding: 0.75rem 2rem;
+  background-color: #16a34a;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: 0.75rem;
+  shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+@media (min-width: 640px) {
+  .btn-save {
+    width: auto;
+  }
+}
+
+.btn-save:hover:not(:disabled) {
+  background-color: #15803d;
+}
+
+.btn-save:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.btn-save:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Grilla Responsiva de Grupos */
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .groups-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .groups-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tarjetas de Grupos */
+.group-card {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.group-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.teams-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Filas de Equipos */
+.team-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  cursor: grab;
+  user-select: none;
+
+  /* OPTIMIZACIÓN: Solo animamos los colores para evitar tirones al cambiar de orden en tiempo real */
+  transition: background-color 0.1s ease, border-color 0.1s ease;
+  touch-action: none;
+}
+
+/* Efecto cuando pasas el mouse por encima de un equipo */
+.team-item:hover {
+  background-color: #edf2f7;
+  border-color: #cbd5e1;
+}
+
+/* OPTIMIZACIÓN EXACTA: Estilo de "hueco" sutil que evita el parpadeo y duplicación del país */
+.team-item.dragging {
+  opacity: 0.25;
+  background-color: #e2e8f0;
+  border: 2px dashed #94a3b8;
+  box-shadow: none;
+  transform: scale(0.98);
+  cursor: grabbing;
+}
+
+/* El pequeño icono indicador de arrastre (las tres rayitas) */
+.drag-handle {
+  color: #94a3b8;
+  margin-right: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.team-index {
+  font-weight: 700;
+  color: black;
+  width: 1rem;
+}
+
+.team-flag {
+  font-size: 1.25rem;
+  font-family: "Twemoji Country Flags", "Segoe UI Emoji", "Apple Color Emoji", sans-serif !important;
+}
+
+/* Reemplaza o añade esto en tu archivo CSS */
+.team-flag-img {
+  width: 36px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+.team-name {
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Botones de Control Arriba/Abajo (Se mantienen intactos por si acaso) */
+.team-controls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.btn-control {
+  padding: 0.25rem 0.5rem;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-control:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.btn-control:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   NUEVOS ESTILOS PARA LA PUNTUACIÓN Y NAVEGACIÓN (AÑADIR AL FINAL)
+   ========================================================================= */
+
+/* Contenedor de pestañas */
+.tabs-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background-color: #334155;
+  color: white;
+}
+
+.tab-btn.active {
+  background-color: #16a34a; /* Verde que combine con tu botón guardar */
+  color: white;
+  border-color: #16a34a;
+}
+
+/* Tarjeta del Leaderboard */
+.leaderboard-card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
+.leaderboard-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.loading-text {
+  text-align: center;
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+/* Estructura de la Tabla */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.leaderboard-table th {
+  background-color: #f1f5f9;
+  color: #475569;
+  text-align: center;
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.leaderboard-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 1.1rem;
+}
+
+/* Detalles visuales del podio */
+.podium-first {
+  background-color: #fef08a; /* Resalta al primer lugar en amarillo claro */
+  font-weight: bold;
+}
+
+.rank-cell {
+  width: 15%;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+.user-cell {
+  width: 55%;
+  text-align: center;
+
+}
+
+.points-cell {
+  width: 30%;
+  text-align: center;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+/* ==========================================================================
+   MIGRACIÓN DE ESTILOS EN LÍNEA (REMOVIDOS DE App.jsx)
+   ========================================================================== */
+
+/* Barra secundaria de control de pronósticos */
+.pronosticos-actions-bar {
+  margin-top: 0 !important;
+  border-top: none !important;
+  border-radius: 0 0 16px 16px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  justify-content: center !important;
+}
+
+/* Agrupador de botones guardar / captura */
+.action-buttons-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Botón de descarga de foto */
+.btn-download {
+  background-color: #2b6cb0 !important;
+}
+
+.btn-download:hover:not(:disabled) {
+  background-color: #1d4ed8 !important;
+}
+
+/* Contenedor completo para la captura con html2canvas */
+.zona-captura-contenedor {
+  padding: 30px;
+  background: #121212;
+  border-radius: 16px;
+  margin-top: 15px;
+}
+
+/* Encabezado dentro de la imagen generada */
+.capture-header {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #2d3748;
+  padding-bottom: 15px;
+}
+
+.capture-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+}
+
+.capture-username {
+  color: #4299e1;
+  text-transform: uppercase;
+}
+
+.capture-header p {
+  margin: 5px 0 0 0;
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+/* Reseteo de relleno para la grilla de captura */
+.groups-grid-capture {
+  padding: 0 !important;
+}
+
+/* --- CLASES DE LA VISTA DE REGLAMENTO --- */
+.reglas-container {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  text-align: left !important;
+}
+
+.reglas-title {
+  text-align: center !important;
+}
+
+.reglas-description {
+  color: black;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.reglas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estructura base de los bloques de reglas */
+.regla-card {
+  background: #1a202c;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.regla-exacta {
+  border-left: 5px solid #48bb78;
+}
+
+.regla-exacta h3 {
+  margin: 0 0 10px 0;
+  color: #48bb78;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.regla-cruzada {
+  border-left: 5px solid #4299e1;
+}
+
+.regla-cruzada h3 {
+  margin: 0 0 10px 0;
+  color: #4299e1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.regla-card p {
+  margin: 0;
+  color: #cbd5e0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.regla-card ul {
+  color: #a0aec0;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.regla-card li {
+  margin-bottom: 5px;
+}
+
+/* Cuadro de aviso/nota aclaratoria inferior */
+.regla-nota {
+  background: #2d3748;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #a0aec0;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES: ADAPTACIÓN PARA MÓVILES (iPhone, Galaxy S24, Tablets)
+   ========================================================================== */
+
+/* 1. TABLETS Y PANTALLAS MEDIANAS (Max-width: 1024px)
+   Aquí los grupos se acomodarán en 2 columnas en lugar de 3 o 4 */
+@media (max-width: 1024px) {
+  .groups-container,
+  .groups-grid { /* Ajusta al nombre de tu contenedor principal de grupos */
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+    padding: 15px;
+  }
+}
+
+/* 2. CELULARES ESTÁNDAR Y GRANDES (Max-width: 768px)
+   Ideal para iPhone Pro Max, Samsung Ultra y navegación vertical fluida */
+@media (max-width: 768px) {
+
+  /* Contenedor General de la App */
+  .app-container {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  /* Título Principal (Polla Mundialista 2026) */
+  .app-container h1,
+  .title-main {
+    font-size: 1.8rem !important;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  /* Botones de Navegación (Armar Polla / Tabla de Posiciones)
+     En móvil es mejor que se apilen uno encima del otro para que sean fáciles de presionar */
+  .nav-buttons,
+  .tabs-container {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  .nav-buttons button,
+  .btn-tab {
+    width: 100% !important; /* Ocupan todo el ancho disponible */
+    padding: 14px !important; /* Más altos para mejorar la experiencia táctil (Tappable Area) */
+    font-size: 1rem !important;
+    border-radius: 8px;
+  }
+
+  /* Contenedor de Grupos: Pasamos a 1 sola columna vertical */
+  .groups-container,
+  .groups-grid {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  /* Tarjeta de cada Grupo (Grupo A, B, C...) */
+  .group-card,
+  .card-grupo {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 16px 12px !important;
+  }
+
+  /* Filas de los Equipos (Mejoramos el espacio para el Drag and Drop táctil) */
+  .team-item,
+  .equipo-row {
+    padding: 12px 10px !important; /* Más espacio interno para que el dedo no se equivoque */
+    font-size: 0.95rem !important;
+  }
+
+  /* El icono de las tres rayas (☰) se agranda un poco para control táctil */
+  .drag-handle {
+    font-size: 1.2rem;
+    padding: 0 8px;
+  }
+
+  /* --- RANKING / TABLA DE POSICIONES EN MÓVIL --- */
+  .ranking-container,
+  .leaderboard-card {
+    padding: 15px 10px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Para evitar que la tabla de posiciones rompa el layout si los nombres son largos */
+  .table-responsive-wrapper {
+    overflow-x: auto; /* Permite scroll horizontal suave SOLO en la tabla si es necesario */
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .leaderboard-table {
+    width: 100%;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 12px 8px !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* 3. CELULARES PEQUEÑOS (Max-width: 400px)
+   Para dispositivos compactos como el iPhone SE o pantallas con fuentes muy grandes */
+@media (max-width: 400px) {
+  .app-container h1,
+  .title-main {
+    font-size: 1.5rem !important;
+  }
+
+  .team-item,
+  .equipo-row {
+    font-size: 0.88rem !important;
+  }
+
+  .group-card h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
