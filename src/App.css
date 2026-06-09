@@ -67,6 +67,7 @@
   transition: all 0.2s;
   margin-top: 0.75rem;
   font-size: 1.2rem;
+  background-color: black;
 }
 
 .name-input:focus {
@@ -297,7 +298,7 @@
   border-radius: 0.75rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   max-width: 45rem;
-  margin: 0 auto;
+  margin: 1.5rem auto;
 }
 
 .leaderboard-title {
@@ -437,7 +438,7 @@
 /* --- CLASES DE LA VISTA DE REGLAMENTO --- */
 .reglas-container {
   max-width: 800px !important;
-  margin: 0 auto !important;
+  margin: 1.5rem auto !important;
   text-align: left !important;
 }
 
