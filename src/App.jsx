@@ -52,7 +52,7 @@ const calcularPuntosPorGrupo = (prediccion, resultadoReal, listaMejoresTerceros 
       // Un equipo realmente avanzó si fue 1°, 2° o si fue un 3° que entró en los mejores 8
       const avanzoReal = indexReal === 0 || indexReal === 1 || (indexReal === 2 && listaMejoresTerceros.includes(equipo));
 
-      // El usuario predijo que avanzaría si lo puso en zona de clasificación potencial (1°, 2° o 3°)
+      // El usuario predicho que avanzaría si lo puso en zona de clasificación potencial (1°, 2° o 3°)
       // El 4° puesto siempre es eliminación directa, por ende si lo puso 4° no esperaba que avance.
       const avanzoPredicho = indexPredicho < 3;
 
@@ -260,7 +260,6 @@ function App() {
 
         {vistaActual === 'pronosticos' && (
             <>
-              {/* Se eliminó el estilo inline y se añadió la clase pronosticos-actions-bar */}
               <div className="app-header pronosticos-actions-bar">
                 <div className="name-card">
                   <label className="name-label">👤 Tu Nombre:</label>
@@ -273,13 +272,11 @@ function App() {
                   />
                 </div>
 
-                {/* Se eliminó el estilo inline y se añadió la clase action-buttons-group */}
                 <div className="action-buttons-group">
                   <button onClick={guardarPronosticos} disabled={cargando} className="btn-save">
                     {cargando ? 'Guardando...' : '💾 Guardar Pronóstico Final'}
                   </button>
 
-                  {/* Se eliminó el estilo inline y se añadió la clase btn-download */}
                   <button
                       onClick={descargarFotoRespaldo}
                       disabled={generandoImagen}
@@ -290,9 +287,7 @@ function App() {
                 </div>
               </div>
 
-              {/* Se eliminó el estilo inline y se añadió la clase zona-captura-contenedor */}
               <div id="zona-captura-pronosticos" className="zona-captura-contenedor">
-                {/* Se eliminó el estilo inline de la cabecera de la captura */}
                 <div className="capture-header">
                   <h2>
                     📋 PRONÓSTICOS DE: <span className="capture-username">{nombre.trim() || 'INVITADO'}</span>
@@ -300,7 +295,6 @@ function App() {
                   <p>Polla Mundialista 2026 🏆</p>
                 </div>
 
-                {/* Se eliminó el estilo inline y se añadió la clase groups-grid-capture */}
                 <div className="groups-grid groups-grid-capture">
                   {Object.keys(grupos).map((grupoKey) => (
                       <div key={grupoKey} className="group-card">
@@ -348,6 +342,12 @@ function App() {
         {vistaActual === 'posiciones' && (
             <div className="leaderboard-card">
               <h2 className="leaderboard-title">Ranking General de la Polla Mundialista🏆</h2>
+
+              {/* ⚠️ BANNER DE ACLARACIÓN PROVISIONAL (Estilos inline removidos) */}
+              <div className="regla-nota provisional-notice">
+                ⚠️ <strong>Aclaración para los participantes ⚠️:</strong> Este ranking es <strong>estrictamente referencial y provisional.</strong> Los puntajes mostrados corresponden únicamente a los resultados de la <strong>Primera Jornada</strong> del Mundial. Estos puntos <strong>NO son acumulativos</strong> ni representan el total definitivo de la polla; se reiniciarán/actualizarán conforme se jueguen las siguientes fechas del torneo. ¡Es solo para ver quién empezó con el pie derecho!
+              </div>
+
               {cargando ? (
                   <p className="loading-text">Calculando puntajes en tiempo real...</p>
               ) : leaderboard.length === 0 ? (
@@ -378,7 +378,6 @@ function App() {
         )}
 
         {vistaActual === 'reglas' && (
-            /* Se eliminaron todos los estilos inline y se sustituyeron por clases semánticas */
             <div className="leaderboard-card reglas-container">
               <h2 className="leaderboard-title reglas-title">Reglamento y Sistema de Puntuación 🎯</h2>
 
@@ -387,12 +386,9 @@ function App() {
               </p>
 
               <div className="reglas-lista">
-
                 {/* REGLA 1 */}
                 <div className="regla-card regla-exacta">
-                  <h3>
-                    🥇 Regla 1: Posición Exacta (+3 Puntos)
-                  </h3>
+                  <h3>🥇 Regla 1: Posición Exacta (+3 Puntos)</h3>
                   <p>
                     Si colocas a una selección en una posición específica del grupo (sea 1°, 2°, 3° o 4° puesto) y en la tabla real oficial termina <strong>exactamente en esa misma posición</strong>, te aseguras de inmediato la bonificación máxima de <strong>3 puntos</strong> por ese equipo.
                   </p>
@@ -400,15 +396,13 @@ function App() {
 
                 {/* REGLA 2 */}
                 <div className="regla-card regla-cruzada">
-                  <h3>
-                    🔄 Regla 2: Clasificación Cruzada (+1 Punto)
-                  </h3>
+                  <h3>🔄 Regla 2: Clasificación Cruzada (+1 Punto)</h3>
                   <p>
                     Si pronosticaste que un equipo iba a clasificar a la siguiente ronda (colocándolo en 1°, 2° o 3° puesto) y el equipo <strong>efectivamente avanza a los Dieciseisavos de Final</strong>, pero fallaste la posición exacta en el grupo, sumas <strong>1 punto</strong>.
                   </p>
                   <ul>
                     <li>Un equipo en 3° puesto avanza únicamente si clasifica en el grupo oficial de los <strong>8 mejores terceros</strong> del certamen.</li>
-                    <li>Colocar a un equipo en 4° puesto significa que estimas su eliminación directa, por lo tanto no califica a puntos por cruzado.</li>
+                    <li>Colocar a un equipo en 4° puesto significa que evas su eliminación directa, por lo tanto no califica a puntos por cruzado.</li>
                   </ul>
                 </div>
 
@@ -416,7 +410,6 @@ function App() {
                 <div className="regla-nota">
                   💡 <strong>Nota de consistencia:</strong> Los puntos dentro de un mismo equipo no son acumulables; se prioriza siempre la Regla 1 (3 pts) por encima de la Regla 2 (1 pt). El puntaje máximo ideal por grupo perfecto es de <strong>12 puntos</strong>.
                 </div>
-
               </div>
             </div>
         )}

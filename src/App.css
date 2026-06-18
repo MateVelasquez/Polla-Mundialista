@@ -349,13 +349,11 @@
   width: 15%;
   font-weight: bold;
   text-align: center;
-
 }
 
 .user-cell {
   width: 55%;
   text-align: center;
-
 }
 
 .points-cell {
@@ -517,42 +515,40 @@
   color: #a0aec0;
 }
 
+/* Clase para el aviso temporal del Leaderboard (Removidos estilos en línea) */
+.provisional-notice {
+  margin-bottom: 20px;
+  border-left: 4px solid #f1c40f;
+  background-color: #fff9db; /* Fondo amarillo muy sutil para contrastar en la tarjeta blanca */
+  color: black; /* Texto marrón oscuro legible */
+}
 /* ==========================================================================
    MEDIA QUERIES: ADAPTACIÓN PARA MÓVILES (iPhone, Galaxy S24, Tablets)
    ========================================================================== */
 
-/* 1. TABLETS Y PANTALLAS MEDIANAS (Max-width: 1024px)
-   Aquí los grupos se acomodarán en 2 columnas en lugar de 3 o 4 */
+/* 1. TABLETS Y PANTALLAS MEDIANAS (Max-width: 1024px) */
 @media (max-width: 1024px) {
-  .groups-container,
-  .groups-grid { /* Ajusta al nombre de tu contenedor principal de grupos */
+  .groups-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 16px;
     padding: 15px;
   }
 }
 
-/* 2. CELULARES ESTÁNDAR Y GRANDES (Max-width: 768px)
-   Ideal para iPhone Pro Max, Samsung Ultra y navegación vertical fluida */
+/* 2. CELULARES ESTÁNDAR Y GRANDES (Max-width: 768px) */
 @media (max-width: 768px) {
 
-  /* Contenedor General de la App */
   .app-container {
     padding: 10px;
     max-width: 100%;
   }
 
-  /* Título Principal (Polla Mundialista 2026) */
-  .app-container h1,
-  .title-main {
+  .app-container h1 {
     font-size: 1.8rem !important;
     text-align: center;
     margin-bottom: 15px;
   }
 
-  /* Botones de Navegación (Armar Polla / Tabla de Posiciones)
-     En móvil es mejor que se apilen uno encima del otro para que sean fáciles de presionar */
-  .nav-buttons,
   .tabs-container {
     flex-direction: column !important;
     width: 100%;
@@ -560,16 +556,13 @@
     padding: 0 10px;
   }
 
-  .nav-buttons button,
-  .btn-tab {
-    width: 100% !important; /* Ocupan todo el ancho disponible */
-    padding: 14px !important; /* Más altos para mejorar la experiencia táctil (Tappable Area) */
+  .tabs-container button {
+    width: 100% !important;
+    padding: 14px !important;
     font-size: 1rem !important;
     border-radius: 8px;
   }
 
-  /* Contenedor de Grupos: Pasamos a 1 sola columna vertical */
-  .groups-container,
   .groups-grid {
     grid-template-columns: 1fr !important;
     display: flex !important;
@@ -578,44 +571,26 @@
     padding: 10px;
   }
 
-  /* Tarjeta de cada Grupo (Grupo A, B, C...) */
-  .group-card,
-  .card-grupo {
+  .group-card {
     width: 100% !important;
     box-sizing: border-box;
     padding: 16px 12px !important;
   }
 
-  /* Filas de los Equipos (Mejoramos el espacio para el Drag and Drop táctil) */
-  .team-item,
-  .equipo-row {
-    padding: 12px 10px !important; /* Más espacio interno para que el dedo no se equivoque */
+  .team-item {
+    padding: 12px 10px !important;
     font-size: 0.95rem !important;
   }
 
-  /* El icono de las tres rayas (☰) se agranda un poco para control táctil */
   .drag-handle {
     font-size: 1.2rem;
     padding: 0 8px;
   }
 
-  /* --- RANKING / TABLA DE POSICIONES EN MÓVIL --- */
-  .ranking-container,
   .leaderboard-card {
     padding: 15px 10px !important;
     width: 100% !important;
     box-sizing: border-box;
-  }
-
-  /* Para evitar que la tabla de posiciones rompa el layout si los nombres son largos */
-  .table-responsive-wrapper {
-    overflow-x: auto; /* Permite scroll horizontal suave SOLO en la tabla si es necesario */
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .leaderboard-table {
-    width: 100%;
   }
 
   .leaderboard-table th,
@@ -625,16 +600,13 @@
   }
 }
 
-/* 3. CELULARES PEQUEÑOS (Max-width: 400px)
-   Para dispositivos compactos como el iPhone SE o pantallas con fuentes muy grandes */
+/* 3. CELULARES PEQUEÑOS (Max-width: 400px) */
 @media (max-width: 400px) {
-  .app-container h1,
-  .title-main {
+  .app-container h1 {
     font-size: 1.5rem !important;
   }
 
-  .team-item,
-  .equipo-row {
+  .team-item {
     font-size: 0.88rem !important;
   }
 
@@ -642,4 +614,3 @@
     font-size: 1.1rem !important;
   }
 }
-
