@@ -345,7 +345,7 @@ function App() {
 
               {/* ⚠️ BANNER DE ACLARACIÓN PROVISIONAL (Estilos inline removidos) */}
               <div className="regla-nota provisional-notice">
-                ⚠️ <strong>Aclaración para los participantes ⚠️:</strong> Este ranking es <strong>estrictamente referencial y provisional.</strong> Los puntajes mostrados corresponden únicamente a los resultados de la <strong>Primera Jornada</strong> del Mundial. Estos puntos <strong>NO son acumulativos</strong> ni representan el total definitivo de la polla; se reiniciarán/actualizarán conforme se jueguen las siguientes fechas del torneo. ¡Es solo para ver quién empezó con el pie derecho!
+                ⚠️ <strong>Aclaración para los participantes ⚠️:</strong> Este ranking es <strong>estrictamente referencial y provisional.</strong> Los puntajes mostrados corresponden únicamente a los resultados de la <strong>Segunda Jornada</strong> del Mundial. Estos puntos <strong>NO son acumulativos</strong> ni representan el total definitivo de la polla; se reiniciarán/actualizarán conforme se jueguen las siguientes fechas del torneo. ¡Es solo para ver quién sigue en camino hacia la victoria!. <strong>Este es el último ranking antes del cierre de la fase de grupos de la Copa del Mundo 2026. Mucha Suerte a todos! </strong>
               </div>
 
               {cargando ? (
